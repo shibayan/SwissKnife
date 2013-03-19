@@ -8,6 +8,11 @@ namespace SwissKnife.Mvc.Html
     {
         public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
         {
+            return DropDownListFor(htmlHelper, expression, null);
+        }
+
+        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
+        {
             throw new NotImplementedException();
         }
     }

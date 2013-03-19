@@ -12,14 +12,16 @@ namespace SwissKnife.Mvc
         {
             _type = type;
             _propertyName = propertyName;
+
+            ErrorMessage = "";
         }
 
         private readonly Type _type;
         private readonly string _propertyName;
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        public override bool IsValid(object value)
         {
-            var selectList = (IEnumerable<SelectListItem>)_type.GetProperty(_propertyName).GetValue(null);
+            var selectList = _type.GetProperty(_propertyName).GetValue(null) as IEnumerable<SelectListItem>;
 
             if (selectList == null)
             {
@@ -28,12 +30,7 @@ namespace SwissKnife.Mvc
 
             var tempValue = value.ToString();
 
-            if (selectList.All(p => p.Value != tempValue))
-            {
-                return new ValidationResult(ErrorMessage);
-            }
-
-            return null;
+            return selectList.Any(p => p.Value == tempValue);
         }
     }
 }
