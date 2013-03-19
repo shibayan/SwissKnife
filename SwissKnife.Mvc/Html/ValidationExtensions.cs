@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 
-namespace SwissKnife.Html
+namespace SwissKnife.Mvc.Html
 {
     public static class ValidationExtensions
     {

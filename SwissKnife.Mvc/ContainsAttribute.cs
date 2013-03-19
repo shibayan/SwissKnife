@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace SwissKnife
+namespace SwissKnife.Mvc
 {
     public class ContainsAttribute : ValidationAttribute
     {

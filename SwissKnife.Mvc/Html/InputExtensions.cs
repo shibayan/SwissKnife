@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Web.Mvc;
 
-namespace SwissKnife.Html
+namespace SwissKnife.Mvc.Html
 {
     public static class InputExtensions
     {

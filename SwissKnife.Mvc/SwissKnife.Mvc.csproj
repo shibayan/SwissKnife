@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00140396-2584-407E-8BA1-4E7B0581A9F4}</ProjectGuid>
+    <ProjectGuid>{88C48C6F-2522-4F6A-8381-BF38395E2776}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SwissKnife</RootNamespace>
-    <AssemblyName>SwissKnife</AssemblyName>
+    <RootNamespace>SwissKnife.Mvc</RootNamespace>
+    <AssemblyName>SwissKnife.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -72,9 +72,9 @@
     <Compile Include="ContainsAttribute.cs" />
     <Compile Include="Html\DisplayExtensions.cs" />
     <Compile Include="Html\InputExtensions.cs" />
+    <Compile Include="Html\SelectExtensions.cs" />
     <Compile Include="Html\ValidationExtensions.cs" />
     <Compile Include="NoClientCacheAttribute.cs" />
-    <Compile Include="Html\SelectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectListExtensions.cs" />
   </ItemGroup>

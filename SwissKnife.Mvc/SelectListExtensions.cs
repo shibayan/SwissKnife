@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 
-namespace SwissKnife
+namespace SwissKnife.Mvc
 {
     public static class SelectListExtensions
     {

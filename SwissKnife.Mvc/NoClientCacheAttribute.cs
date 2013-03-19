@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace SwissKnife
+namespace SwissKnife.Mvc
 {
     public class NoClientCacheAttribute : ActionFilterAttribute
     {
