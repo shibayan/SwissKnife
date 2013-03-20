@@ -75,6 +75,8 @@
     <Compile Include="Html\SelectExtensions.cs" />
     <Compile Include="Html\ValidationExtensions.cs" />
     <Compile Include="NoClientCacheAttribute.cs" />
+    <Compile Include="NoOutputCacheAttribute.cs" />
+    <Compile Include="OutputCacheExAttribute.cs" />
     <Compile Include="PhoneNumberAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectListExtensions.cs" />
