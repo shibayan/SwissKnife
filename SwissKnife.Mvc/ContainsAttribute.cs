@@ -21,7 +21,14 @@ namespace SwissKnife.Mvc
 
         public override bool IsValid(object value)
         {
-            var selectList = _type.GetProperty(_propertyName).GetValue(null) as IEnumerable<SelectListItem>;
+            var propertyInfo = _type.GetProperty(_propertyName);
+
+            if (propertyInfo == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var selectList = propertyInfo.GetValue(null) as IEnumerable<SelectListItem>;
 
             if (selectList == null)
             {

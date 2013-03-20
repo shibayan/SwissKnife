@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text;
 using System.Web.Mvc;
 
 namespace SwissKnife.Mvc.Html
@@ -14,7 +15,45 @@ namespace SwissKnife.Mvc.Html
 
         public static MvcHtmlString CheckBoxListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
         {
-            throw new NotImplementedException();
+            if (expression == null)
+            {
+                throw new ArgumentNullException("expression");
+            }
+
+            var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+
+            return CheckBoxListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+        }
+
+        private static MvcHtmlString CheckBoxListHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IDictionary<string, object> htmlAttributes)
+        {
+            var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+
+            // TODO:Enum 型の場合は数値にキャストしてから文字列変換
+            var tempValue = metadata.Model.ToString();
+
+            var selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
+
+            if (selectList == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var checkBoxBuilder = new StringBuilder();
+
+            foreach (var selectListItem in selectList)
+            {
+                var tagBuilder = new TagBuilder("input");
+
+                tagBuilder.MergeAttributes(htmlAttributes);
+                tagBuilder.MergeAttribute("type", "checkbox");
+                tagBuilder.MergeAttribute("name", fullName, true);
+                tagBuilder.MergeAttribute("value", selectListItem.Value);
+
+                checkBoxBuilder.AppendLine(tagBuilder.ToString(TagRenderMode.SelfClosing));
+            }
+
+            return MvcHtmlString.Create(checkBoxBuilder.ToString());
         }
 
         public static MvcHtmlString RadioButtonListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
@@ -24,10 +63,22 @@ namespace SwissKnife.Mvc.Html
 
         public static MvcHtmlString RadioButtonListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
         {
-            var name = ExpressionHelper.GetExpressionText(expression);
-            var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            if (expression == null)
+            {
+                throw new ArgumentNullException("expression");
+            }
 
             var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+
+            return RadioButtonListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+        }
+
+        private static MvcHtmlString RadioButtonListHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IDictionary<string, object> htmlAttributes)
+        {
+            var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+
+            // TODO:Enum 型の場合は数値にキャストしてから文字列変換
+            var tempValue = metadata.Model.ToString();
 
             var selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
 
@@ -40,7 +91,9 @@ namespace SwissKnife.Mvc.Html
             {
                 var tagBuilder = new TagBuilder("input");
 
+                tagBuilder.MergeAttributes(htmlAttributes);
                 tagBuilder.MergeAttribute("type", "radio");
+                tagBuilder.MergeAttribute("name", fullName, true);
             }
 
             throw new NotImplementedException();
