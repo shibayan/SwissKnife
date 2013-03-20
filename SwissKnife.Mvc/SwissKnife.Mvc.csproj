@@ -78,6 +78,7 @@
     <Compile Include="NoOutputCacheAttribute.cs" />
     <Compile Include="OutputCacheExAttribute.cs" />
     <Compile Include="PhoneNumberAttribute.cs" />
+    <Compile Include="PostalCodeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectListExtensions.cs" />
   </ItemGroup>
