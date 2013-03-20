@@ -13,6 +13,7 @@ namespace SwissKnife.Mvc
             _type = type;
             _propertyName = propertyName;
 
+            // TODO:デフォルトのエラーメッセージを決める
             ErrorMessage = "";
         }
 

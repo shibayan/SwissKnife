@@ -8,6 +8,7 @@ namespace SwissKnife.Mvc
         public PostalCodeAttribute()
             : base(DataType.PostalCode)
         {
+            // TODO:デフォルトのエラーメッセージを決める
             ErrorMessage = "";
         }
 

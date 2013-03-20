@@ -26,6 +26,7 @@ namespace SwissKnife.Mvc.Html
                 throw new InvalidOperationException();
             }
 
+            // TODO:Enum 型の場合は数値にキャストしてから文字列変換
             var tempValue = metadata.Model.ToString();
 
             var selectListItem = selectList.FirstOrDefault(p => p.Value == tempValue);

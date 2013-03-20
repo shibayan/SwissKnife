@@ -8,6 +8,7 @@ namespace SwissKnife.Mvc
         public PhoneNumberAttribute()
             : base(DataType.PhoneNumber)
         {
+            // TODO:デフォルトのエラーメッセージを決める
             ErrorMessage = "";
         }
 
