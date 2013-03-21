@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text;
 using System.Web.Mvc;
 
 namespace SwissKnife.Mvc.Html
@@ -28,8 +29,7 @@ namespace SwissKnife.Mvc.Html
         {
             var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
-            // TODO:Enum 型の場合は数値にキャストしてから文字列変換
-            var tempValue = metadata.Model.ToString();
+            var tempValue = TypeHelpers.ToString(metadata);
 
             var selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
 
@@ -38,7 +38,34 @@ namespace SwissKnife.Mvc.Html
                 throw new InvalidOperationException();
             }
 
+            var optionBuilder = new StringBuilder();
+
+            foreach (var selectListItem in selectList)
+            {
+                optionBuilder.AppendLine(ListItemToOption(selectListItem));
+            }
+
+            var tagBuilder = new TagBuilder("select")
+            {
+                InnerHtml = optionBuilder.ToString()
+            };
+
+            tagBuilder.MergeAttributes(htmlAttributes);
+            tagBuilder.MergeAttribute("name", fullName, true);
+
             throw new NotImplementedException();
+        }
+
+        private static string ListItemToOption(SelectListItem item)
+        {
+            var tagBuilder = new TagBuilder("option")
+            {
+                InnerHtml = item.Text
+            };
+
+            tagBuilder.MergeAttribute("value", item.Value);
+
+            return tagBuilder.ToString(TagRenderMode.SelfClosing);
         }
     }
 }

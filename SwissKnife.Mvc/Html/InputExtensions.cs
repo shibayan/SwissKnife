@@ -29,8 +29,7 @@ namespace SwissKnife.Mvc.Html
         {
             var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
-            // TODO:Enum 型の場合は数値にキャストしてから文字列変換
-            var tempValue = metadata.Model.ToString();
+            var tempValue = TypeHelpers.ToString(metadata);
 
             var selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
 
@@ -77,8 +76,7 @@ namespace SwissKnife.Mvc.Html
         {
             var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
-            // TODO:Enum 型の場合は数値にキャストしてから文字列変換
-            var tempValue = metadata.Model.ToString();
+            var tempValue = TypeHelpers.ToString(metadata);
 
             var selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
 
