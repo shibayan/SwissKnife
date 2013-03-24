@@ -15,6 +15,11 @@ namespace SwissKnife.Mvc.Html
 
         public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
         {
+            return DropDownListFor(htmlHelper, expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+        }
+
+        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -22,7 +27,7 @@ namespace SwissKnife.Mvc.Html
 
             var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
 
-            return DropDownListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return DropDownListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), htmlAttributes);
         }
 
         private static MvcHtmlString DropDownListHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IDictionary<string, object> htmlAttributes)

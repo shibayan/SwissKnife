@@ -13,7 +13,17 @@ namespace SwissKnife.Mvc.Html
             return CheckBoxListFor(htmlHelper, expression, null);
         }
 
-        public static MvcHtmlString CheckBoxListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
+        public static MvcHtmlString CheckBoxListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList)
+        {
+            return CheckBoxListFor(htmlHelper, expression, selectList, null);
+        }
+
+        public static MvcHtmlString CheckBoxListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes)
+        {
+            return CheckBoxListFor(htmlHelper, expression, selectList, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+        }
+
+        public static MvcHtmlString CheckBoxListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
         {
             if (expression == null)
             {
@@ -22,20 +32,23 @@ namespace SwissKnife.Mvc.Html
 
             var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
 
-            return CheckBoxListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return CheckBoxListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), selectList, htmlAttributes);
         }
 
-        private static MvcHtmlString CheckBoxListHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IDictionary<string, object> htmlAttributes)
+        private static MvcHtmlString CheckBoxListHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
         {
             var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
             var tempValue = TypeHelpers.ToString(metadata);
 
-            var selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
-
             if (selectList == null)
             {
-                throw new InvalidOperationException();
+                selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
+
+                if (selectList == null)
+                {
+                    throw new InvalidOperationException();
+                }
             }
 
             var checkBoxBuilder = new StringBuilder();
@@ -55,12 +68,32 @@ namespace SwissKnife.Mvc.Html
             return MvcHtmlString.Create(checkBoxBuilder.ToString());
         }
 
+        public static MvcHtmlString RadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object value)
+        {
+            return RadioButtonFor(htmlHelper, expression, value, null);
+        }
+
+        public static MvcHtmlString RadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object value, object htmlAttributes)
+        {
+            return RadioButtonFor(htmlHelper, expression, value, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+        }
+
+        public static MvcHtmlString RadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object value, IDictionary<string, object> htmlAttributes)
+        {
+            throw new NotImplementedException();
+        }
+
         public static MvcHtmlString RadioButtonListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
         {
             return RadioButtonListFor(htmlHelper, expression, null);
         }
 
         public static MvcHtmlString RadioButtonListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
+        {
+            return RadioButtonListFor(htmlHelper, expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+        }
+
+        public static MvcHtmlString RadioButtonListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
         {
             if (expression == null)
             {
@@ -69,7 +102,7 @@ namespace SwissKnife.Mvc.Html
 
             var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
 
-            return RadioButtonListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return RadioButtonListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), htmlAttributes);
         }
 
         private static MvcHtmlString RadioButtonListHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IDictionary<string, object> htmlAttributes)
