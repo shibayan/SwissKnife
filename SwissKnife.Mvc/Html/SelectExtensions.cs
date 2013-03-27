@@ -13,12 +13,17 @@ namespace SwissKnife.Mvc.Html
             return DropDownListFor(htmlHelper, expression, null);
         }
 
-        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
+        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList)
         {
-            return DropDownListFor(htmlHelper, expression, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return DropDownListFor(htmlHelper, expression, selectList, null);
         }
 
-        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes)
+        {
+            return DropDownListFor(htmlHelper, expression, selectList, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+        }
+
+        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
         {
             if (expression == null)
             {
@@ -27,27 +32,30 @@ namespace SwissKnife.Mvc.Html
 
             var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
 
-            return DropDownListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), htmlAttributes);
+            return DropDownListHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), selectList, htmlAttributes);
         }
 
-        private static MvcHtmlString DropDownListHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IDictionary<string, object> htmlAttributes)
+        private static MvcHtmlString DropDownListHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
         {
             var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
             var tempValue = TypeHelpers.ToString(metadata);
 
-            var selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
-
             if (selectList == null)
             {
-                throw new InvalidOperationException();
+                selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
+
+                if (selectList == null)
+                {
+                    throw new InvalidOperationException();
+                }
             }
 
             var optionBuilder = new StringBuilder();
 
             foreach (var selectListItem in selectList)
             {
-                optionBuilder.AppendLine(ListItemToOption(selectListItem));
+                optionBuilder.AppendLine(ListItemToOption(selectListItem, tempValue));
             }
 
             var tagBuilder = new TagBuilder("select")
@@ -58,10 +66,12 @@ namespace SwissKnife.Mvc.Html
             tagBuilder.MergeAttributes(htmlAttributes);
             tagBuilder.MergeAttribute("name", fullName, true);
 
-            throw new NotImplementedException();
+            tagBuilder.GenerateId(fullName);
+
+            return MvcHtmlString.Create(tagBuilder.ToString(TagRenderMode.Normal));
         }
 
-        private static string ListItemToOption(SelectListItem item)
+        private static string ListItemToOption(SelectListItem item, string selectedValue)
         {
             var tagBuilder = new TagBuilder("option")
             {
@@ -69,6 +79,11 @@ namespace SwissKnife.Mvc.Html
             };
 
             tagBuilder.MergeAttribute("value", item.Value);
+
+            if (item.Selected || item.Value == selectedValue)
+            {
+                tagBuilder.MergeAttribute("selected", "selected");
+            }
 
             return tagBuilder.ToString(TagRenderMode.SelfClosing);
         }
