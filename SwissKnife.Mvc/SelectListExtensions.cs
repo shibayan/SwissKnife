@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -22,9 +23,28 @@ namespace SwissKnife.Mvc
                        .Cast<TEnum>()
                        .Select(p => new SelectListItem
                        {
-                           Value = Convert.ToInt32(p).ToString(),
-                           Text = p.ToString()
+                           Value = p.ToString(),
+                           Text = GetDisplayName(p)
                        }).ToList();
+        }
+
+        private static string GetDisplayName<TValue>(this TValue value) where TValue : struct
+        {
+            var field = typeof(TValue).GetField(value.ToString());
+
+            if (field == null)
+            {
+                return "";
+            }
+
+            var attribute = Attribute.GetCustomAttribute(field, typeof(DisplayAttribute), false) as DisplayAttribute;
+
+            if (attribute == null)
+            {
+                return "";
+            }
+
+            return attribute.Name;
         }
     }
 }

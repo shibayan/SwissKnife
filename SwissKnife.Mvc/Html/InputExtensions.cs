@@ -142,6 +142,11 @@ namespace SwissKnife.Mvc.Html
                 tagBuilder.MergeAttribute("name", fullName, true);
                 tagBuilder.MergeAttribute("value", selectListItem.Value);
 
+                if (selectListItem.Selected || selectListItem.Value == tempValue)
+                {
+                    tagBuilder.MergeAttribute("checked", "checked");
+                }
+
                 radioButtonBuilder.AppendLine(tagBuilder.ToString(TagRenderMode.SelfClosing));
             }
 

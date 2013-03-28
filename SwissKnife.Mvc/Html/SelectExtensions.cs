@@ -8,22 +8,22 @@ namespace SwissKnife.Mvc.Html
 {
     public static class SelectExtensions
     {
-        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
+        public static MvcHtmlString DropDownListExFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
         {
-            return DropDownListFor(htmlHelper, expression, null);
+            return DropDownListExFor(htmlHelper, expression, null);
         }
 
-        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList)
+        public static MvcHtmlString DropDownListExFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList)
         {
-            return DropDownListFor(htmlHelper, expression, selectList, null);
+            return DropDownListExFor(htmlHelper, expression, selectList, null);
         }
 
-        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes)
+        public static MvcHtmlString DropDownListExFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes)
         {
-            return DropDownListFor(htmlHelper, expression, selectList, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return DropDownListExFor(htmlHelper, expression, selectList, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString DropDownListExFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, IDictionary<string, object> htmlAttributes)
         {
             if (expression == null)
             {
@@ -85,7 +85,7 @@ namespace SwissKnife.Mvc.Html
                 tagBuilder.MergeAttribute("selected", "selected");
             }
 
-            return tagBuilder.ToString(TagRenderMode.SelfClosing);
+            return tagBuilder.ToString(TagRenderMode.Normal);
         }
     }
 }
