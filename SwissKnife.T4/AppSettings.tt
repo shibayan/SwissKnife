@@ -96,13 +96,15 @@ public class Entry : List<Entry>
     {
         var entry = this;
 
-        foreach (var token in path.Split('.'))
+        foreach (var token in path.Split(new[] { '.', ':' }, StringSplitOptions.RemoveEmptyEntries))
         {
-            var next = this.FirstOrDefault(p => p.Name == token);
+			var name = Char.ToUpper(token[0]) + token.Substring(1);
+
+            var next = this.FirstOrDefault(p => p.Name == name);
 
             if (next == null)
             {
-                next = new Entry(token);
+                next = new Entry(name);
 
                 entry.Add(next);
             }

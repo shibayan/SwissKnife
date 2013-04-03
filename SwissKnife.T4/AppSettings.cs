@@ -4,17 +4,63 @@ namespace SwissKnife.T4
 {
     public static class AppSettings
     {
-        public static class Foo
+        public static string ClientValidationEnabled
         {
-            public static string Bar
+            get { return ConfigurationManager.AppSettings["ClientValidationEnabled"]; }
+        }
+
+        public static class Facebook
+        {
+            public static string AppId
             {
-                get { return ConfigurationManager.AppSettings["Foo.Bar"]; }
+                get { return ConfigurationManager.AppSettings["Facebook:AppId"]; }
+            }
+
+            public static string AppNamespace
+            {
+                get { return ConfigurationManager.AppSettings["Facebook:AppNamespace"]; }
+            }
+
+            public static string AppSecret
+            {
+                get { return ConfigurationManager.AppSettings["Facebook:AppSecret"]; }
+            }
+
+            public static string AuthorizationRedirectPath
+            {
+                get { return ConfigurationManager.AppSettings["Facebook:AuthorizationRedirectPath"]; }
+            }
+
+            public static class VerifyToken
+            {
+                public static string User
+                {
+                    get { return ConfigurationManager.AppSettings["Facebook:VerifyToken:User"]; }
+                }
             }
         }
 
-        public static string Sample
+        public static string PreserveLoginUrl
         {
-            get { return ConfigurationManager.AppSettings["Sample"]; }
+            get { return ConfigurationManager.AppSettings["PreserveLoginUrl"]; }
+        }
+
+        public static string UnobtrusiveJavaScriptEnabled
+        {
+            get { return ConfigurationManager.AppSettings["UnobtrusiveJavaScriptEnabled"]; }
+        }
+
+        public static class Webpages
+        {
+            public static string Enabled
+            {
+                get { return ConfigurationManager.AppSettings["webpages:Enabled"]; }
+            }
+
+            public static string Version
+            {
+                get { return ConfigurationManager.AppSettings["webpages:Version"]; }
+            }
         }
     }
 }
