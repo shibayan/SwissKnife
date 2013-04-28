@@ -51,41 +51,47 @@ namespace SwissKnife.Mvc.Html
                 }
             }
 
-            var checkBoxBuilder = new StringBuilder();
+            var checkBoxes = new StringBuilder();
 
             foreach (var selectListItem in selectList)
             {
-                var tagBuilder = new TagBuilder("input");
+                var id = fullName + "-" + selectListItem.Value;
 
-                tagBuilder.MergeAttributes(htmlAttributes);
-                tagBuilder.MergeAttribute("type", "checkbox");
-                tagBuilder.MergeAttribute("name", fullName, true);
-                tagBuilder.MergeAttribute("value", selectListItem.Value);
+                var checkBoxBuilder = new TagBuilder("input");
+
+                checkBoxBuilder.MergeAttributes(htmlAttributes);
+                checkBoxBuilder.MergeAttribute("type", "checkbox");
+                checkBoxBuilder.MergeAttribute("name", fullName, true);
+                checkBoxBuilder.MergeAttribute("value", selectListItem.Value);
+
+                checkBoxBuilder.MergeAttribute("id", id);
 
                 if (selectListItem.Value == tempValue)
                 {
-                    tagBuilder.MergeAttribute("checked", "checked");
+                    checkBoxBuilder.MergeAttribute("checked", "checked");
                 }
 
-                checkBoxBuilder.AppendLine(tagBuilder.ToString(TagRenderMode.SelfClosing));
+                checkBoxes.AppendLine(checkBoxBuilder.ToString(TagRenderMode.SelfClosing));
+
+                var labelBuilder = new TagBuilder("label")
+                {
+                    InnerHtml = htmlHelper.Encode(selectListItem.Text)
+                };
+
+                labelBuilder.MergeAttribute("for", id);
+
+                checkBoxes.AppendLine(labelBuilder.ToString(TagRenderMode.Normal));
             }
 
-            return MvcHtmlString.Create(checkBoxBuilder.ToString());
-        }
+            var hiddenBuilder = new TagBuilder("input");
 
-        public static MvcHtmlString RadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object value)
-        {
-            return RadioButtonFor(htmlHelper, expression, value, null);
-        }
+            hiddenBuilder.MergeAttribute("type", "hidden");
+            hiddenBuilder.MergeAttribute("name", fullName);
+            hiddenBuilder.MergeAttribute("value", "");
 
-        public static MvcHtmlString RadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object value, object htmlAttributes)
-        {
-            return RadioButtonFor(htmlHelper, expression, value, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
-        }
+            checkBoxes.AppendLine(hiddenBuilder.ToString(TagRenderMode.Normal));
 
-        public static MvcHtmlString RadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object value, IDictionary<string, object> htmlAttributes)
-        {
-            throw new NotImplementedException();
+            return MvcHtmlString.Create(checkBoxes.ToString());
         }
 
         public static MvcHtmlString RadioButtonListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
@@ -131,26 +137,47 @@ namespace SwissKnife.Mvc.Html
                 }
             }
 
-            var radioButtonBuilder = new StringBuilder();
+            var radioButtons = new StringBuilder();
 
             foreach (var selectListItem in selectList)
             {
-                var tagBuilder = new TagBuilder("input");
+                var id = fullName + "-" + selectListItem.Value;
 
-                tagBuilder.MergeAttributes(htmlAttributes);
-                tagBuilder.MergeAttribute("type", "radio");
-                tagBuilder.MergeAttribute("name", fullName, true);
-                tagBuilder.MergeAttribute("value", selectListItem.Value);
+                var radioButtonBuilder = new TagBuilder("input");
+
+                radioButtonBuilder.MergeAttributes(htmlAttributes);
+                radioButtonBuilder.MergeAttribute("type", "radio");
+                radioButtonBuilder.MergeAttribute("name", fullName, true);
+                radioButtonBuilder.MergeAttribute("value", selectListItem.Value);
+
+                radioButtonBuilder.MergeAttribute("id", id);
 
                 if (selectListItem.Selected || selectListItem.Value == tempValue)
                 {
-                    tagBuilder.MergeAttribute("checked", "checked");
+                    radioButtonBuilder.MergeAttribute("checked", "checked");
                 }
 
-                radioButtonBuilder.AppendLine(tagBuilder.ToString(TagRenderMode.SelfClosing));
+                radioButtons.AppendLine(radioButtonBuilder.ToString(TagRenderMode.SelfClosing));
+
+                var labelBuilder = new TagBuilder("label")
+                {
+                    InnerHtml = htmlHelper.Encode(selectListItem.Text)
+                };
+
+                labelBuilder.MergeAttribute("for", id);
+
+                radioButtons.AppendLine(labelBuilder.ToString(TagRenderMode.Normal));
             }
 
-            return MvcHtmlString.Create(radioButtonBuilder.ToString());
+            var hiddenBuilder = new TagBuilder("input");
+
+            hiddenBuilder.MergeAttribute("type", "hidden");
+            hiddenBuilder.MergeAttribute("name", fullName);
+            hiddenBuilder.MergeAttribute("value", "");
+
+            radioButtons.AppendLine(hiddenBuilder.ToString(TagRenderMode.Normal));
+
+            return MvcHtmlString.Create(radioButtons.ToString());
         }
     }
 }
