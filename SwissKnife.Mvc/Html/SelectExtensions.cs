@@ -51,16 +51,16 @@ namespace SwissKnife.Mvc.Html
                 }
             }
 
-            var optionBuilder = new StringBuilder();
+            var optionsBuilder = new StringBuilder();
 
             foreach (var selectListItem in selectList)
             {
-                optionBuilder.AppendLine(ListItemToOption(selectListItem, tempValue));
+                optionsBuilder.AppendLine(ListItemToOption(selectListItem, tempValue));
             }
 
             var tagBuilder = new TagBuilder("select")
             {
-                InnerHtml = optionBuilder.ToString()
+                InnerHtml = optionsBuilder.ToString()
             };
 
             tagBuilder.MergeAttributes(htmlAttributes);

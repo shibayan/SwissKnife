@@ -10,20 +10,31 @@ namespace SwissKnife.Mvc.Html
     {
         public static MvcHtmlString DisplaySelectFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
         {
+            return DisplaySelectFor(htmlHelper, expression, null);
+        }
+
+        public static MvcHtmlString DisplaySelectFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList)
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
             }
 
-            var name = ExpressionHelper.GetExpressionText(expression);
-
             var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
 
-            var selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
+            return DisplaySelectHelper(htmlHelper, metadata, ExpressionHelper.GetExpressionText(expression), selectList);
+        }
 
+        private static MvcHtmlString DisplaySelectHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IEnumerable<SelectListItem> selectList)
+        {
             if (selectList == null)
             {
-                throw new InvalidOperationException();
+                selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
+
+                if (selectList == null)
+                {
+                    throw new InvalidOperationException();
+                }
             }
 
             var tempValue = TypeHelpers.ToString(metadata);

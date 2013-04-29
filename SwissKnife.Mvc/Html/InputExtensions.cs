@@ -71,14 +71,10 @@ namespace SwissKnife.Mvc.Html
                     checkBoxBuilder.MergeAttribute("checked", "checked");
                 }
 
-                checkBoxes.AppendLine(checkBoxBuilder.ToString(TagRenderMode.SelfClosing));
-
                 var labelBuilder = new TagBuilder("label")
                 {
-                    InnerHtml = htmlHelper.Encode(selectListItem.Text)
+                    InnerHtml = checkBoxBuilder.ToString(TagRenderMode.SelfClosing) + htmlHelper.Encode(selectListItem.Text)
                 };
-
-                labelBuilder.MergeAttribute("for", id);
 
                 checkBoxes.AppendLine(labelBuilder.ToString(TagRenderMode.Normal));
             }
@@ -89,7 +85,7 @@ namespace SwissKnife.Mvc.Html
             hiddenBuilder.MergeAttribute("name", fullName);
             hiddenBuilder.MergeAttribute("value", "");
 
-            checkBoxes.AppendLine(hiddenBuilder.ToString(TagRenderMode.Normal));
+            checkBoxes.AppendLine(hiddenBuilder.ToString(TagRenderMode.SelfClosing));
 
             return MvcHtmlString.Create(checkBoxes.ToString());
         }
@@ -157,14 +153,10 @@ namespace SwissKnife.Mvc.Html
                     radioButtonBuilder.MergeAttribute("checked", "checked");
                 }
 
-                radioButtons.AppendLine(radioButtonBuilder.ToString(TagRenderMode.SelfClosing));
-
                 var labelBuilder = new TagBuilder("label")
                 {
-                    InnerHtml = htmlHelper.Encode(selectListItem.Text)
+                    InnerHtml = radioButtonBuilder.ToString(TagRenderMode.SelfClosing) + htmlHelper.Encode(selectListItem.Text)
                 };
-
-                labelBuilder.MergeAttribute("for", id);
 
                 radioButtons.AppendLine(labelBuilder.ToString(TagRenderMode.Normal));
             }
@@ -175,7 +167,7 @@ namespace SwissKnife.Mvc.Html
             hiddenBuilder.MergeAttribute("name", fullName);
             hiddenBuilder.MergeAttribute("value", "");
 
-            radioButtons.AppendLine(hiddenBuilder.ToString(TagRenderMode.Normal));
+            radioButtons.AppendLine(hiddenBuilder.ToString(TagRenderMode.SelfClosing));
 
             return MvcHtmlString.Create(radioButtons.ToString());
         }
