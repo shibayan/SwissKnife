@@ -39,7 +39,7 @@ namespace SwissKnife.Mvc.Html
         {
             var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
-            var tempValue = TypeHelpers.ToString(metadata);
+            var tempValue = TypeHelpers.GetModelValue(metadata);
 
             if (selectList == null)
             {
@@ -121,7 +121,7 @@ namespace SwissKnife.Mvc.Html
         {
             var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
-            var tempValue = TypeHelpers.ToString(metadata);
+            var tempValue = TypeHelpers.GetModelValue(metadata);
 
             if (selectList == null)
             {

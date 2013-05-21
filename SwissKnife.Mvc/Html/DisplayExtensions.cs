@@ -27,6 +27,8 @@ namespace SwissKnife.Mvc.Html
 
         private static MvcHtmlString DisplaySelectHelper(HtmlHelper htmlHelper, ModelMetadata metadata, string name, IEnumerable<SelectListItem> selectList)
         {
+            var tempValue = TypeHelpers.GetModelValue(metadata);
+
             if (selectList == null)
             {
                 selectList = htmlHelper.ViewData.Eval(name) as IEnumerable<SelectListItem>;
@@ -36,8 +38,6 @@ namespace SwissKnife.Mvc.Html
                     throw new InvalidOperationException();
                 }
             }
-
-            var tempValue = TypeHelpers.ToString(metadata);
 
             var selectListItem = selectList.FirstOrDefault(p => p.Value == tempValue);
 

@@ -70,13 +70,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContainsAttribute.cs" />
+    <Compile Include="DisplayModeAttribute.cs" />
     <Compile Include="Html\DisplayExtensions.cs" />
     <Compile Include="Html\InputExtensions.cs" />
+    <Compile Include="Html\PagingExtensions.cs" />
+    <Compile Include="Html\ResourceExtensions.cs" />
     <Compile Include="Html\SelectExtensions.cs" />
     <Compile Include="Html\ValidationExtensions.cs" />
     <Compile Include="NoClientCacheAttribute.cs" />
     <Compile Include="NoOutputCacheAttribute.cs" />
     <Compile Include="OutputCacheExAttribute.cs" />
+    <Compile Include="PagingInfo.cs" />
     <Compile Include="PhoneNumberAttribute.cs" />
     <Compile Include="PostalCodeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

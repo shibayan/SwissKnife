@@ -5,7 +5,7 @@ namespace SwissKnife.Mvc
 {
     internal static class TypeHelpers
     {
-        public static string ToString(ModelMetadata metadata)
+        public static string GetModelValue(ModelMetadata metadata)
         {
             if (metadata.Model == null)
             {
