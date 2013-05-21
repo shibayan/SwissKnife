@@ -25,8 +25,16 @@
             @Html.LabelFor(model => model.ColorId)
         </div>
         <div class="editor-field">
-            @Html.RadioButtonListFor(model => model.ColorId)
+            @Html.CheckBoxListFor(model => model.ColorId)
             @Html.ValidationMessageFor(model => model.ColorId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ToggleId)
+        </div>
+        <div class="editor-field">
+            @Html.RadioButtonListFor(model => model.ToggleId)
+            @Html.ValidationMessageFor(model => model.ToggleId)
         </div>
 
         <p>

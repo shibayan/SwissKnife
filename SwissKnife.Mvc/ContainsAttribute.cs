@@ -14,7 +14,7 @@ namespace SwissKnife.Mvc
             _propertyName = propertyName;
 
             // TODO:デフォルトのエラーメッセージを決める
-            ErrorMessage = "";
+            ErrorMessage = "選択された値が不正です。";
         }
 
         private readonly Type _type;
@@ -36,6 +36,13 @@ namespace SwissKnife.Mvc
                 throw new InvalidOperationException();
             }
 
+            if (TypeHelpers.IsCollection(value))
+            {
+                var tempValues = TypeHelpers.GetCollection(value);
+
+                return tempValues.All(p => selectList.Any(q => q.Value == p));
+            }
+            
             var tempValue = value.ToString();
 
             return selectList.Any(p => p.Value == tempValue);

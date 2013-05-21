@@ -19,29 +19,43 @@ namespace SwissKnife.Mvc
 
         public static IList<SelectListItem> ToSelectList<TEnum>() where TEnum : struct
         {
-            return Enum.GetValues(typeof(TEnum))
+            var type = typeof(TEnum);
+
+            if (!type.IsEnum)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return Enum.GetValues(type)
                        .Cast<TEnum>()
                        .Select(p => new SelectListItem
                        {
                            Value = p.ToString(),
                            Text = GetDisplayName(p)
                        }).ToList();
-        }
+        } 
 
-        private static string GetDisplayName<TValue>(this TValue value) where TValue : struct
+        private static string GetDisplayName<TEnum>(TEnum value) where TEnum : struct
         {
-            var field = typeof(TValue).GetField(value.ToString());
+            var type = typeof(TEnum);
+
+            if (!type.IsEnum)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var field = type.GetField(value.ToString());
 
             if (field == null)
             {
-                return "";
+                return null;
             }
 
             var attribute = Attribute.GetCustomAttribute(field, typeof(DisplayAttribute), false) as DisplayAttribute;
 
             if (attribute == null)
             {
-                return "";
+                return null;
             }
 
             return attribute.Name;

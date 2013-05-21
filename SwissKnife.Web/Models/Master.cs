@@ -69,6 +69,8 @@ namespace SwissKnife.Web.Models
 
         private static readonly IEnumerable<SelectListItem> _colorList = _colors.ToSelectList();
 
+        private static readonly IEnumerable<SelectListItem> _toggleList = SelectListExtensions.ToSelectList<Toggle>();
+
         public static IEnumerable<SelectListItem> PrefectureList
         {
             get { return _prefectureList; }
@@ -77,6 +79,11 @@ namespace SwissKnife.Web.Models
         public static IEnumerable<SelectListItem> ColorList
         {
             get { return _colorList; }
+        }
+
+        public static IEnumerable<SelectListItem> ToggleList
+        {
+            get { return _toggleList; }
         }
     }
 }

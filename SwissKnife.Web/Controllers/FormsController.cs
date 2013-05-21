@@ -12,7 +12,7 @@ namespace SwissKnife.Web.Controllers
             var model = new FormModel
             {
                 PrefectureId = 13,
-                ColorId = 2,
+                ColorId = new[] { 2 },
             };
 
             return View(model);
@@ -30,6 +30,7 @@ namespace SwissKnife.Web.Controllers
 
             ViewBag.PrefectureId = Master.PrefectureList;
             ViewBag.ColorId = Master.ColorList;
+            ViewBag.ToggleId = Master.ToggleList;
         }
     }
 }

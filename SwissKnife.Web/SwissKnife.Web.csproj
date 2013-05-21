@@ -134,6 +134,7 @@
     <Compile Include="Hubs\EchoHub.cs" />
     <Compile Include="Models\FormModel.cs" />
     <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\Toggle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

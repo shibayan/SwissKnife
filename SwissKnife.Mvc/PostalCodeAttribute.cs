@@ -9,7 +9,7 @@ namespace SwissKnife.Mvc
             : base(DataType.PostalCode)
         {
             // TODO:デフォルトのエラーメッセージを決める
-            ErrorMessage = "";
+            ErrorMessage = "郵便番号の値が不正です。";
         }
 
         private static readonly Regex _regex = new Regex(@"\d{3}-\d{4}", RegexOptions.Compiled);

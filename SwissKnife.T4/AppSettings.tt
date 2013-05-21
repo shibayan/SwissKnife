@@ -29,6 +29,8 @@ using System.Configuration;
 
 namespace <#= namespaceName #>
 {
+    [System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
 <# WriteClass(root); #>
 }
 
@@ -36,7 +38,7 @@ namespace <#= namespaceName #>
 void WriteClass(Entry parent)
 {
 #>
-    public static class <#= parent.Name #>
+    internal static class <#= parent.Name #>
     {
 <#+
 PushIndent("    ");
@@ -69,7 +71,7 @@ PopIndent();
 void WriteProperty(Entry entry)
 {
 #>
-    public static string <#= entry.Name #>
+    internal static string <#= entry.Name #>
     {
         get { return ConfigurationManager.AppSettings["<#= entry.FullName #>"]; }
     }

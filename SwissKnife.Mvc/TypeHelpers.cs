@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace SwissKnife.Mvc
@@ -12,14 +15,32 @@ namespace SwissKnife.Mvc
                 return "";
             }
 
-            if (typeof(Enum).IsAssignableFrom(metadata.ModelType))
-            {
-                var underlyingType = Enum.GetUnderlyingType(metadata.ModelType);
+            return metadata.Model.ToString();
+        }
 
-                return Convert.ChangeType(metadata.Model, underlyingType).ToString();
+        public static IList<string> GetModelValues(ModelMetadata metadata)
+        {
+            if (!IsCollection(metadata.Model))
+            {
+                throw new InvalidOperationException();
             }
 
-            return metadata.Model.ToString();
+            if (metadata.Model == null)
+            {
+                return new string[0];
+            }
+
+            return GetCollection(metadata.Model);
+        }
+
+        public static bool IsCollection(object value)
+        {
+            return value is IEnumerable;
+        }
+
+        public static IList<string> GetCollection(object value)
+        {
+            return ((IEnumerable)value).Cast<object>().Select(p => p.ToString()).ToList();
         }
     }
 }

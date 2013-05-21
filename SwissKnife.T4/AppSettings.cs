@@ -2,62 +2,64 @@
 
 namespace SwissKnife.T4
 {
-    public static class AppSettings
+    [System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
+    internal static class AppSettings
     {
-        public static string ClientValidationEnabled
+        internal static string ClientValidationEnabled
         {
             get { return ConfigurationManager.AppSettings["ClientValidationEnabled"]; }
         }
 
-        public static class Facebook
+        internal static class Facebook
         {
-            public static string AppId
+            internal static string AppId
             {
                 get { return ConfigurationManager.AppSettings["Facebook:AppId"]; }
             }
 
-            public static string AppNamespace
+            internal static string AppNamespace
             {
                 get { return ConfigurationManager.AppSettings["Facebook:AppNamespace"]; }
             }
 
-            public static string AppSecret
+            internal static string AppSecret
             {
                 get { return ConfigurationManager.AppSettings["Facebook:AppSecret"]; }
             }
 
-            public static string AuthorizationRedirectPath
+            internal static string AuthorizationRedirectPath
             {
                 get { return ConfigurationManager.AppSettings["Facebook:AuthorizationRedirectPath"]; }
             }
 
-            public static class VerifyToken
+            internal static class VerifyToken
             {
-                public static string User
+                internal static string User
                 {
                     get { return ConfigurationManager.AppSettings["Facebook:VerifyToken:User"]; }
                 }
             }
         }
 
-        public static string PreserveLoginUrl
+        internal static string PreserveLoginUrl
         {
             get { return ConfigurationManager.AppSettings["PreserveLoginUrl"]; }
         }
 
-        public static string UnobtrusiveJavaScriptEnabled
+        internal static string UnobtrusiveJavaScriptEnabled
         {
             get { return ConfigurationManager.AppSettings["UnobtrusiveJavaScriptEnabled"]; }
         }
 
-        public static class Webpages
+        internal static class Webpages
         {
-            public static string Enabled
+            internal static string Enabled
             {
                 get { return ConfigurationManager.AppSettings["webpages:Enabled"]; }
             }
 
-            public static string Version
+            internal static string Version
             {
                 get { return ConfigurationManager.AppSettings["webpages:Version"]; }
             }

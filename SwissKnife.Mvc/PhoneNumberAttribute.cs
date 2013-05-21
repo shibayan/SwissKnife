@@ -9,7 +9,7 @@ namespace SwissKnife.Mvc
             : base(DataType.PhoneNumber)
         {
             // TODO:デフォルトのエラーメッセージを決める
-            ErrorMessage = "";
+            ErrorMessage = "電話番号の値が不正です。";
         }
 
         private static readonly Regex _regex = new Regex(@"\d{2,4}-\d{1,5}-\d{4}", RegexOptions.Compiled);

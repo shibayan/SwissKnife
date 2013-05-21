@@ -39,7 +39,7 @@ namespace SwissKnife.Mvc.Html
         {
             var fullName = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
-            var tempValue = TypeHelpers.GetModelValue(metadata);
+            var tempValues = TypeHelpers.GetModelValues(metadata);
 
             if (selectList == null)
             {
@@ -66,7 +66,7 @@ namespace SwissKnife.Mvc.Html
 
                 checkBoxBuilder.MergeAttribute("id", id);
 
-                if (selectListItem.Value == tempValue)
+                if (tempValues.Contains(selectListItem.Value))
                 {
                     checkBoxBuilder.MergeAttribute("checked", "checked");
                 }
@@ -78,14 +78,6 @@ namespace SwissKnife.Mvc.Html
 
                 checkBoxes.AppendLine(labelBuilder.ToString(TagRenderMode.Normal));
             }
-
-            var hiddenBuilder = new TagBuilder("input");
-
-            hiddenBuilder.MergeAttribute("type", "hidden");
-            hiddenBuilder.MergeAttribute("name", fullName);
-            hiddenBuilder.MergeAttribute("value", "");
-
-            checkBoxes.AppendLine(hiddenBuilder.ToString(TagRenderMode.SelfClosing));
 
             return MvcHtmlString.Create(checkBoxes.ToString());
         }
