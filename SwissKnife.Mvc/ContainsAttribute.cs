@@ -13,7 +13,6 @@ namespace SwissKnife.Mvc
             _type = type;
             _propertyName = propertyName;
 
-            // TODO:デフォルトのエラーメッセージを決める
             ErrorMessage = "選択された値が不正です。";
         }
 
