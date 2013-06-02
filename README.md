@@ -25,3 +25,9 @@ ASP.NET 向けの T4 テンプレート。
 Web.config から型付けされた AppSettings クラスを自動的に生成。
 
     Install-Package SwissKnife.T4.AppSettings
+
+## SwissKnife.WebPages
+
+ASP.NET Web Pages 向けのライブラリ。
+
+    Install-Package SwissKnife.WebPages

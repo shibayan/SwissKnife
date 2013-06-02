@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("SwissKnife.T4")]
+[assembly: AssemblyTitle("SwissKnife.WebPages")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SwissKnife.T4")]
+[assembly: AssemblyProduct("SwissKnife.WebPages")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 次の GUID は、このプロジェクトが COM に公開される場合の、typelib の ID です
-[assembly: Guid("00c7fee0-b90f-4b6b-9c1e-a72ba7bf4e9a")]
+[assembly: Guid("4ca0627f-3112-48f6-b013-308a98cc6e69")]
 
 // アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //

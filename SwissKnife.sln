@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissKnife.SignalR", "Swiss
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissKnife.T4", "SwissKnife.T4\SwissKnife.T4.csproj", "{3F821B40-16DC-4B11-93F3-74F9A4E4015C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissKnife.WebPages", "SwissKnife.WebPages\SwissKnife.WebPages.csproj", "{39276A4F-D793-4B6F-AD7D-C8AD49F80006}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{3F821B40-16DC-4B11-93F3-74F9A4E4015C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F821B40-16DC-4B11-93F3-74F9A4E4015C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F821B40-16DC-4B11-93F3-74F9A4E4015C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39276A4F-D793-4B6F-AD7D-C8AD49F80006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39276A4F-D793-4B6F-AD7D-C8AD49F80006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39276A4F-D793-4B6F-AD7D-C8AD49F80006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39276A4F-D793-4B6F-AD7D-C8AD49F80006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
