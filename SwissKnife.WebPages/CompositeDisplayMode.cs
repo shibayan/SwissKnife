@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.WebPages;
@@ -8,12 +7,12 @@ namespace SwissKnife.WebPages
 {
     public class CompositeDisplayMode : IDisplayMode
     {
-        public CompositeDisplayMode(IEnumerable<IDisplayMode> modes)
+        public CompositeDisplayMode(params IDisplayMode[] modes)
         {
             _modes = modes;
         }
 
-        private readonly IEnumerable<IDisplayMode> _modes;
+        private readonly IDisplayMode[] _modes;
 
         public bool CanHandleContext(HttpContextBase httpContext)
         {

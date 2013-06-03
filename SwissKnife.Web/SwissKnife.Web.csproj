@@ -180,6 +180,10 @@
       <Project>{24113697-8827-4bfe-a20e-50c439f02b51}</Project>
       <Name>SwissKnife.SignalR</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SwissKnife.WebPages\SwissKnife.WebPages.csproj">
+      <Project>{39276a4f-d793-4b6f-ad7d-c8ad49f80006}</Project>
+      <Name>SwissKnife.WebPages</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
