@@ -11,7 +11,7 @@ namespace SwissKnife.Mvc
             ErrorMessage = "電話番号の値が不正です。";
         }
 
-        private static readonly Regex _regex = new Regex(@"\d{2,4}-\d{1,5}-\d{4}", RegexOptions.Compiled);
+        private static readonly Regex _regex = new Regex(@"\d{2,4}-\d{1,5}-\d{4}", RegexOptions.ECMAScript | RegexOptions.Compiled);
 
         public override bool IsValid(object value)
         {

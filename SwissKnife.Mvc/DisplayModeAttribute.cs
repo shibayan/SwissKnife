@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -9,6 +10,11 @@ namespace SwissKnife.Mvc
     {
         public DisplayModeAttribute(string displayModeId)
         {
+            if (displayModeId == null)
+            {
+                throw new ArgumentNullException("displayModeId");
+            }
+
             _displayModeId = displayModeId;
         }
 

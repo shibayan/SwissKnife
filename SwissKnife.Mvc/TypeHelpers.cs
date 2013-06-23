@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -20,7 +21,7 @@ namespace SwissKnife.Mvc
 
         public static IList<string> GetModelValues(ModelMetadata metadata)
         {
-            if (!IsCollection(metadata.Model))
+            if (!IsCollection(metadata.ModelType))
             {
                 throw new InvalidOperationException();
             }
@@ -33,9 +34,29 @@ namespace SwissKnife.Mvc
             return GetCollection(metadata.Model);
         }
 
-        public static bool IsCollection(object value)
+        public static bool IsComplexType(Type type)
         {
-            return value is IEnumerable;
+            return !TypeDescriptor.GetConverter(type).CanConvertFrom(typeof(string));
+        }
+
+        public static bool IsCollection(Type type)
+        {
+            if (type.IsGenericType)
+            {
+                var genericTypeDefinition = type.GetGenericTypeDefinition();
+
+                if (genericTypeDefinition == typeof(List<>))
+                {
+                    return true;
+                }
+
+                if (genericTypeDefinition == typeof(IEnumerable<>) || genericTypeDefinition == typeof(ICollection<>) || genericTypeDefinition == typeof(IList<>))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public static IList<string> GetCollection(object value)

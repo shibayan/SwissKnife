@@ -10,6 +10,16 @@ namespace SwissKnife.Mvc
     {
         public ContainsAttribute(Type type, string propertyName)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException("propertyName");
+            }
+
             _type = type;
             _propertyName = propertyName;
 
@@ -35,7 +45,9 @@ namespace SwissKnife.Mvc
                 throw new InvalidOperationException();
             }
 
-            if (TypeHelpers.IsCollection(value))
+            var valueType = value.GetType();
+
+            if (TypeHelpers.IsCollection(valueType))
             {
                 var tempValues = TypeHelpers.GetCollection(value);
 
