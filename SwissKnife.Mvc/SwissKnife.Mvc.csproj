@@ -40,6 +40,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -79,6 +80,7 @@
     <Compile Include="Html\PaginatorExtensions.cs" />
     <Compile Include="Html\SelectExtensions.cs" />
     <Compile Include="Html\ValidationExtensions.cs" />
+    <Compile Include="IPaginatedList.cs" />
     <Compile Include="PaginateInfo.cs" />
     <Compile Include="NoClientCacheAttribute.cs" />
     <Compile Include="NoOutputCacheAttribute.cs" />

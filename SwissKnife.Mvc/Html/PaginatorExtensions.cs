@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
@@ -6,11 +7,23 @@ namespace SwissKnife.Mvc.Html
 {
     public static class PaginatorExtensions
     {
-        public static MvcHtmlString Paginator(this HtmlHelper htmlHelper, string templateName)
+        public static MvcHtmlString PaginatorFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string templateName)
         {
-            throw new NotImplementedException();
+            if (expression == null)
+            {
+                throw new ArgumentNullException("expression");
+            }
 
-            var info = new PaginateInfo(1, 10, 0);
+            var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+
+            var paginatedList = metadata.Model as IPaginatedList;
+
+            if (paginatedList == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var info = new PaginateInfo(paginatedList);
 
             return htmlHelper.Partial(templateName, info);
         }

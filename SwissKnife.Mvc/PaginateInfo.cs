@@ -6,6 +6,11 @@ namespace SwissKnife.Mvc
 {
     public class PaginateInfo
     {
+        public PaginateInfo(IPaginatedList list)
+            : this(list.PageIndex, list.PageCount, list.TotalCount)
+        {
+        }
+
         public PaginateInfo(int pageIndex, int pageCount, int totalCount)
         {
             WindowSize = 5;
