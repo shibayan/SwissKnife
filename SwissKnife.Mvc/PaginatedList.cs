@@ -2,7 +2,7 @@
 
 namespace SwissKnife.Mvc
 {
-    public class PaginatedList<T> : List<T>, IPaginateInfo
+    public class PaginatedList<T> : List<T>
     {
         public PaginatedList(IEnumerable<T> collection, int pageIndex, int pageCount, int totalCount)
             : base(collection)
