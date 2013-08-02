@@ -10,9 +10,20 @@
 var namespaceName = System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint").ToString();
 var templateFileName = Path.GetFileNameWithoutExtension(Host.TemplateFile);
 
+var configFileName = "";
+
+try
+{
+    configFileName = Host.ResolvePath("Web.config");
+}
+catch
+{
+    configFileName = Host.ResolvePath("App.config");
+}
+
 var configFile = new ExeConfigurationFileMap
 {
-    ExeConfigFilename = Host.ResolvePath("Web.config")
+    ExeConfigFilename = configFileName
 };
 
 var config = ConfigurationManager.OpenMappedExeConfiguration(configFile, ConfigurationUserLevel.None);
@@ -38,7 +49,7 @@ namespace <#= namespaceName #>
 void WriteClass(Entry parent)
 {
 #>
-    internal static class <#= parent.Name #>
+    public static class <#= parent.Name #>
     {
 <#+
 PushIndent("    ");
@@ -71,7 +82,7 @@ PopIndent();
 void WriteProperty(Entry entry)
 {
 #>
-    internal static string <#= entry.Name #>
+    public static string <#= entry.Name #>
     {
         get { return ConfigurationManager.AppSettings["<#= entry.FullName #>"]; }
     }
