@@ -89,7 +89,7 @@ namespace SwissKnife.Mvc.Html
 
         public static MvcHtmlString RadioButtonListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList)
         {
-            return RadioButtonListFor(htmlHelper, expression, null, null);
+            return RadioButtonListFor(htmlHelper, expression, selectList, null);
         }
 
         public static MvcHtmlString RadioButtonListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList, object htmlAttributes)
