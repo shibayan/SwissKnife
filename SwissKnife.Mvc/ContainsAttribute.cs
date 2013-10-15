@@ -31,6 +31,11 @@ namespace SwissKnife.Mvc
 
         public override bool IsValid(object value)
         {
+            if (value == null)
+            {
+                return true;
+            }
+
             var propertyInfo = _type.GetProperty(_propertyName);
 
             if (propertyInfo == null)

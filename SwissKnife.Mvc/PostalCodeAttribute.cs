@@ -11,7 +11,7 @@ namespace SwissKnife.Mvc
             ErrorMessage = "郵便番号の値が不正です。";
         }
 
-        private static readonly Regex _regex = new Regex(@"\d{3}-\d{4}", RegexOptions.ECMAScript | RegexOptions.Compiled);
+        private static readonly Regex _regex = new Regex(@"[0-9]{3}-[0-9]{4}", RegexOptions.ECMAScript | RegexOptions.Compiled);
 
         public override bool IsValid(object value)
         {
