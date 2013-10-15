@@ -35,6 +35,11 @@ namespace SwissKnife.T4
 
             public static class VerifyToken
             {
+                public static string Token
+                {
+                    get { return ConfigurationManager.AppSettings["Facebook:VerifyToken:Token"]; }
+                }
+
                 public static string User
                 {
                     get { return ConfigurationManager.AppSettings["Facebook:VerifyToken:User"]; }

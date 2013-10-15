@@ -113,7 +113,7 @@ public class Entry : List<Entry>
         {
 			var name = Char.ToUpper(token[0]) + token.Substring(1);
 
-            var next = this.FirstOrDefault(p => p.Name == name);
+            var next = entry.FirstOrDefault(p => p.Name == name);
 
             if (next == null)
             {
