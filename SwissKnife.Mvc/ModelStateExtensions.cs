@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace SwissKnife.Mvc
 {
-    public static class ModelStateExtensions
+    internal static class ModelStateExtensions
     {
         public static void RemovePrefix(this ModelStateDictionary modelState, string prefix)
         {

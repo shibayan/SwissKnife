@@ -24,12 +24,7 @@ namespace SwissKnife.Mvc
 
                 var value = GetPropertyValue(model, bindingContext.ModelType, conditional.PropertyName);
 
-                if (value == null)
-                {
-                    continue;
-                }
-
-                if (value.Equals(conditional.Value))
+                if (conditional.IsMatch(value))
                 {
                     continue;
                 }

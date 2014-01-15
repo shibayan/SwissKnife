@@ -19,6 +19,8 @@ namespace SwissKnife.Mvc
 
             _propertyName = propertyName;
             _value = value;
+
+            Inverse = false;
         }
 
         private readonly string _propertyName;
@@ -32,6 +34,18 @@ namespace SwissKnife.Mvc
         public object Value
         {
             get { return _value; }
+        }
+
+        public bool Inverse { get; set; }
+
+        internal bool IsMatch(object value)
+        {
+            if (Inverse)
+            {
+                return !Value.Equals(value);
+            }
+
+            return Value.Equals(value);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace SwissKnife.Mvc
         {
             get
             {
-                var start = 1;
+                const int start = 1;
                 var end = TotalPage;
 
                 var windowSize = WindowSize > TotalPage ? TotalPage : WindowSize;

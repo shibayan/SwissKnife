@@ -97,7 +97,10 @@ namespace SwissKnife.Mvc.Html
                 InnerHtml = item.Text
             };
 
-            tagBuilder.MergeAttribute("value", item.Value);
+            if (item.Value != null)
+            {
+                tagBuilder.MergeAttribute("value", item.Value);
+            }
 
             if (item.Selected || item.Value == selectedValue)
             {

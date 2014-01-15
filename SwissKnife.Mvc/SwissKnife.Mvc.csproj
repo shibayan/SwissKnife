@@ -92,6 +92,7 @@
     <Compile Include="PaginatedListExtensions.cs" />
     <Compile Include="PhoneNumberAttribute.cs" />
     <Compile Include="PostalCodeAttribute.cs" />
+    <Compile Include="PreApplicationStartCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequiredValueAttribute.cs" />
     <Compile Include="SelectListExtensions.cs" />

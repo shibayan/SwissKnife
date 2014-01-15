@@ -6,16 +6,16 @@ namespace SwissKnife.Mvc
 {
     public static class PaginatedListExtensions
     {
-        public static PaginatedList<TSource> ToPaginatedList<TSource>(this IEnumerable<TSource> source, int page, int count)
+        public static PaginatedList<TSource> ToPaginatedList<TSource>(this IEnumerable<TSource> source, int pageIndex, int count)
         {
             if (source == null)
             {
                 throw new ArgumentNullException("source");
             }
 
-            if (page < 1)
+            if (pageIndex < 1)
             {
-                throw new ArgumentOutOfRangeException("page");
+                throw new ArgumentOutOfRangeException("pageIndex");
             }
 
             if (count < 1)
@@ -23,22 +23,22 @@ namespace SwissKnife.Mvc
                 throw new ArgumentOutOfRangeException("count");
             }
 
-            var start = (page - 1) * count;
+            var start = (pageIndex - 1) * count;
             var totalCount = source.Count();
 
-            return new PaginatedList<TSource>(source.Skip(start).Take(count), page, count, totalCount);
+            return new PaginatedList<TSource>(source.Skip(start).Take(count), pageIndex, count, totalCount);
         }
 
-        public static PaginatedList<TSource> ToPaginatedList<TSource>(this IQueryable<TSource> source, int page, int count)
+        public static PaginatedList<TSource> ToPaginatedList<TSource>(this IQueryable<TSource> source, int pageIndex, int count)
         {
             if (source == null)
             {
                 throw new ArgumentNullException("source");
             }
 
-            if (page < 1)
+            if (pageIndex < 1)
             {
-                throw new ArgumentOutOfRangeException("page");
+                throw new ArgumentOutOfRangeException("pageIndex");
             }
 
             if (count < 1)
@@ -46,10 +46,10 @@ namespace SwissKnife.Mvc
                 throw new ArgumentOutOfRangeException("count");
             }
 
-            var start = (page - 1) * count;
+            var start = (pageIndex - 1) * count;
             var totalCount = source.Count();
 
-            return new PaginatedList<TSource>(source.Skip(start).Take(count), page, count, totalCount);
+            return new PaginatedList<TSource>(source.Skip(start).Take(count), pageIndex, count, totalCount);
         }
     }
 }
