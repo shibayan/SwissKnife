@@ -9,6 +9,11 @@ namespace SwissKnife.Mvc.Html
     {
         public static MvcHtmlString PaginatorFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string templateName)
         {
+            return PaginatorFor(htmlHelper, expression, templateName, null);
+        }
+
+        public static MvcHtmlString PaginatorFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string templateName, ViewDataDictionary viewData)
+        {
             if (expression == null)
             {
                 throw new ArgumentNullException("expression");
@@ -25,7 +30,7 @@ namespace SwissKnife.Mvc.Html
 
             var info = new PaginateInfo(paginatedList);
 
-            return htmlHelper.Partial(templateName, info);
+            return htmlHelper.Partial(templateName, info, viewData);
         }
     }
 }

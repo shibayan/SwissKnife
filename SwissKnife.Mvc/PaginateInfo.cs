@@ -7,37 +7,37 @@ namespace SwissKnife.Mvc
     public class PaginateInfo
     {
         public PaginateInfo(IPaginatedList list)
-            : this(list.PageIndex, list.PageCount, list.TotalCount)
+            : this(list.PageIndex, list.PageSize, list.TotalCount)
         {
         }
 
-        public PaginateInfo(int pageIndex, int pageCount, int totalCount)
+        public PaginateInfo(int pageIndex, int pageSize, int totalCount)
         {
-            WindowSize = 5;
+            WindowSize = 2;
 
             PageIndex = pageIndex;
-            PageCount = pageCount;
+            PageSize = pageSize;
             TotalCount = totalCount;
 
-            TotalPage = TotalCount == 0 ? 1 : (int)Math.Ceiling((double)TotalCount / PageCount);
+            PageCount = TotalCount == 0 ? 1 : (int)Math.Ceiling((double)TotalCount / PageSize);
 
-            StartIndex = (PageIndex - 1) * PageCount + 1;
-            EndIndex = TotalCount > PageIndex * PageCount ? PageIndex * PageCount : TotalCount;
+            StartIndex = (PageIndex - 1) * PageSize + 1;
+            EndIndex = TotalCount > PageIndex * PageSize ? PageIndex * PageSize : TotalCount;
         }
 
         public int PageIndex { get; private set; }
 
+        public int PageSize { get; private set; }
+
         public int PageCount { get; private set; }
 
-        public int TotalCount { get; private set; }
-
         public int WindowSize { get; private set; }
-
-        public int TotalPage { get; private set; }
 
         public int StartIndex { get; private set; }
 
         public int EndIndex { get; private set; }
+
+        public int TotalCount { get; private set; }
 
         public bool HasPreviousPage
         {
@@ -46,7 +46,7 @@ namespace SwissKnife.Mvc
 
         public bool HasNextPage
         {
-            get { return PageIndex < TotalPage; }
+            get { return PageIndex < PageCount; }
         }
 
         public int PreviousPage
@@ -56,7 +56,7 @@ namespace SwissKnife.Mvc
 
         public int NextPage
         {
-            get { return HasNextPage ? PageIndex + 1 : TotalPage; }
+            get { return HasNextPage ? PageIndex + 1 : PageCount; }
         }
 
         public IEnumerable<int> PageNumbers
@@ -64,16 +64,14 @@ namespace SwissKnife.Mvc
             get
             {
                 const int start = 1;
-                var end = TotalPage;
+                var end = PageCount;
 
-                var windowSize = WindowSize > TotalPage ? TotalPage : WindowSize;
-
-                var windowHalf = windowSize / 2;
+                var windowSize = WindowSize * 2 + 1 > PageCount ? PageCount : WindowSize * 2 + 1;
 
                 int index;
 
-                var startIndex = PageIndex - windowHalf;
-                var endIndex = PageIndex + windowHalf;
+                var startIndex = PageIndex - WindowSize;
+                var endIndex = PageIndex + WindowSize;
 
                 if (start > startIndex)
                 {

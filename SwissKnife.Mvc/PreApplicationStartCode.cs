@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Web.Mvc;
-using System.Web.WebPages.Razor;
 
 namespace SwissKnife.Mvc
 {
@@ -19,8 +18,6 @@ namespace SwissKnife.Mvc
             _startWasCalled = true;
 
             ModelBinders.Binders.DefaultBinder = new ConditionalModelBinder();
-
-            WebPageRazorHost.AddGlobalImport("SwissKnife.Mvc.Html");
         }
     }
 }

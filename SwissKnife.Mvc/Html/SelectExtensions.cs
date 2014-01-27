@@ -87,6 +87,17 @@ namespace SwissKnife.Mvc.Html
 
             tagBuilder.GenerateId(fullName);
 
+            ModelState modelState;
+            if (htmlHelper.ViewData.ModelState.TryGetValue(fullName, out modelState))
+            {
+                if (modelState.Errors.Count > 0)
+                {
+                    tagBuilder.AddCssClass(HtmlHelper.ValidationInputCssClassName);
+                }
+            }
+
+            tagBuilder.MergeAttributes(htmlHelper.GetUnobtrusiveValidationAttributes(name, metadata));
+
             return MvcHtmlString.Create(tagBuilder.ToString(TagRenderMode.Normal));
         }
 
