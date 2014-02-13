@@ -63,19 +63,26 @@ namespace SwissKnife.Mvc
         {
             get
             {
-                const int start = 1;
-                var end = PageCount;
+                const int start = 2;
+                var end = PageCount - 1;
 
-                var windowSize = WindowSize * 2 + 1 > PageCount ? PageCount : WindowSize * 2 + 1;
+                var pageCount = PageCount - 2;
 
-                int index;
+                var windowSize = WindowSize * 2 + 1 > pageCount ? pageCount : WindowSize * 2 + 1;
+
+                if (windowSize <= 0)
+                {
+                    return Enumerable.Empty<int>();
+                }
 
                 var startIndex = PageIndex - WindowSize;
                 var endIndex = PageIndex + WindowSize;
 
+                int index;
+
                 if (start > startIndex)
                 {
-                    index = 1;
+                    index = start;
                 }
                 else if (endIndex > end)
                 {
