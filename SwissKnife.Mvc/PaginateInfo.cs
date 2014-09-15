@@ -21,7 +21,7 @@ namespace SwissKnife.Mvc
 
             PageCount = TotalCount == 0 ? 1 : (int)Math.Ceiling((double)TotalCount / PageSize);
 
-            StartIndex = (PageIndex - 1) * PageSize + 1;
+            StartIndex = TotalCount == 0 ? 0 : (PageIndex - 1) * PageSize + 1;
             EndIndex = TotalCount > PageIndex * PageSize ? PageIndex * PageSize : TotalCount;
         }
 
